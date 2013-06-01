@@ -2,13 +2,13 @@
 ## Intellij IDEA
 ################
 
-.idea/
-*.iml
-*.iws
+#.idea/
+#*.iml
+#*.iws
 
 ################
 ## Maven
 ################
 
-log/
-target/
+#log/
+#target/
