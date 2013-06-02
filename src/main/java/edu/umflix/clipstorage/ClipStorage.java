@@ -11,5 +11,5 @@ import edu.umflix.model.ClipData;
  */
 public interface ClipStorage {
     void storeClipData(ClipData clipdata);
-    ClipData getClipDataById(int id);
+    ClipData getClipDataById(long id);
 }
