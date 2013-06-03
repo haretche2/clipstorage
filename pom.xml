@@ -17,6 +17,46 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0-4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>4.6.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.2.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.2.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.1.Final</version>
+        </dependency>
+        <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0.2</version>
@@ -27,39 +67,15 @@
             <artifactId>umflix-persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0-4</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>3.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
-        <!--
-        The <scope>test</scope> guarantees that non of your runtime
-        code is dependent on any OpenEJB classes.
-        -->
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>openejb-core</artifactId>
-            <version>4.6.0-SNAPSHOT</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
