@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<servers>
+    <server>
+        <address>192.168.1.108</address>
+        <ftpusername>telematica</ftpusername>
+        <ftppassword>telematica2013</ftppassword>
+    </server>
+    <server>
+        <address>192.168.1.109</address>
+        <ftpusername>telematica</ftpusername>
+        <ftppassword>telematica2013</ftppassword>
+    </server>
+    <server>
+        <address>192.168.1.110</address>
+        <ftpusername>telematica</ftpusername>
+        <ftppassword>telematica2013</ftppassword>
+    </server>
+</servers>

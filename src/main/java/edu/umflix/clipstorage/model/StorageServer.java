@@ -12,10 +12,7 @@ import java.io.Serializable;
  * Time: 20:25
  * To change this template use File | Settings | File Templates.
  */
-@Entity
 public class StorageServer implements Serializable {
-    @Id @GeneratedValue()
-    private int id;
     private String address;
     private String username;
     private String password;
@@ -23,14 +20,6 @@ public class StorageServer implements Serializable {
     private boolean isOnline;
 
     public StorageServer(){
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getAddress() {

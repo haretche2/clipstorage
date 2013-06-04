@@ -13,16 +13,9 @@ import java.io.Serializable;
  * Time: 14:45
  * To change this template use File | Settings | File Templates.
  */
-@Entity
 public class ClipDataLocation implements Serializable{
-    @Id @GeneratedValue()
-    private long id;
-    private int servidor;
+    private StorageServer servidor;
     private long clipId;
-
-    public ClipDataLocation(){
-
-    }
 
     public long getClipId() {
         return clipId;
@@ -32,19 +25,11 @@ public class ClipDataLocation implements Serializable{
         this.clipId = clipId;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getServidor() {
+    public StorageServer getServidor() {
         return servidor;
     }
 
-    public void setServidor(int servidor) {
+    public void setServidor(StorageServer servidor) {
         this.servidor = servidor;
     }
 }
