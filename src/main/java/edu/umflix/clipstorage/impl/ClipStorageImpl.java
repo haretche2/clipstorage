@@ -2,16 +2,14 @@ package edu.umflix.clipstorage.impl;
 
 import edu.umflix.clipstorage.ClipStorage;
 import edu.umflix.clipstorage.config.Configuration;
-import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.clipstorage.tools.Memory;
 import edu.umflix.clipstorage.tools.StorageServerTools;
+import edu.umflix.model.Clip;
 import edu.umflix.model.ClipData;
 import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -29,12 +27,12 @@ public class ClipStorageImpl implements ClipStorage{
 
     private static Logger log= Logger.getLogger(ClipStorageImpl.class);
 
-    @PersistenceContext(unitName="clipstorage")
-    EntityManager entityManager;
-
     @Override
     public void storeClipData(ClipData clipdata) {
         List<StorageServer> disponibles= Memory.getOnlineServers();
+                   Clip c =new Clip();
+
+
 
         for(int i=0;i< Configuration.getIntConfiguration("Replicas");i++){
             if(disponibles.size()>0){

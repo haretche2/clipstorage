@@ -12,20 +12,19 @@ public class ClipStorageImplTest {
 
     @Test
     public void testTemp() {
-                          return;
-       /*try {
-            ClipData c=new ClipStorageImpl().getClipDataByClipId(80);
-
+        if(1==1) return;
+       try {
+            ClipData c=new ClipStorageImpl().getClipDataByClipId(20);
+            System.out.print("'");
             for (Byte b:c.getBytes()){
-
                 System.out.print((char)(byte)b);
             }
-
+            System.out.print("'");
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return;
-         */
+
         //new ClipStorageImpl().storeClipData(new ClipData());
                           //System.out.println(Configuration.getConfiguracion("Replicas"));
        /* ClipStorageImpl bean = new ClipStorageImpl();

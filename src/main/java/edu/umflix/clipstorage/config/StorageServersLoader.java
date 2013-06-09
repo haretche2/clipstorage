@@ -2,17 +2,12 @@ package edu.umflix.clipstorage.config;
 
 import edu.umflix.clipstorage.Exceptions.ClipStorageConfiguracionIncompletaException;
 import edu.umflix.clipstorage.model.StorageServer;
-import edu.umflix.clipstorage.tools.FtpTools;
-import edu.umflix.clipstorage.tools.StorageServerTools;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import sun.net.ftp.FtpClient;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

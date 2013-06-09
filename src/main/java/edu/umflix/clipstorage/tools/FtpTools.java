@@ -1,5 +1,6 @@
 package edu.umflix.clipstorage.tools;
 
+import edu.umflix.clipstorage.config.Configuration;
 import edu.umflix.clipstorage.model.StorageServer;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ public class FtpTools {
         try
         {
             log.debug("trying to connect");
+            client.setConnectTimeout(Configuration.getIntConfiguration("TimeoutCrearClienteFTP"));
             client.connect(sFTP);
             log.debug("trying to login");
             boolean login = client.login(sUser, sPassword);

@@ -1,28 +1,17 @@
 package edu.umflix.clipstorage.tools;
 
 import edu.umflix.clipstorage.Exceptions.ClipStorageConfiguracionIncompletaException;
-import edu.umflix.clipstorage.config.Configuration;
 import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.model.ClipData;
-import javassist.bytecode.ExceptionsAttribute;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.log4j.Logger;
-import sun.misc.IOUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 
 
 /**
@@ -71,9 +60,11 @@ public class StorageServerTools {
     }
 
     public static Byte[] leer(StorageServer servidorDelQueLeer, long fileName) throws IOException {
+        log.debug("Iniciando lectura del archivo: "+Long.toString(fileName)+" del servidor: "+servidorDelQueLeer.getAddress());
         FTPClient clienteFtp = FtpTools.getClient(servidorDelQueLeer);
-        ByteArrayOutputStream outputStream = null;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         clienteFtp.retrieveFile(Long.toString(fileName), outputStream);
+
         byte[] bytes=outputStream.toByteArray();
         Byte[] convertedBytes= new Byte[bytes.length];
         for(int i=0;i<bytes.length;i++){
