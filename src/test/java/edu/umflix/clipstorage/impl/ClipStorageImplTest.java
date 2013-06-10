@@ -12,8 +12,8 @@ public class ClipStorageImplTest {
 
     @Test
     public void testTemp() {
-        if(1==1) return;
-       try {
+        return;
+       /*try {
             ClipData c=new ClipStorageImpl().getClipDataByClipId(20);
             System.out.print("'");
             for (Byte b:c.getBytes()){
@@ -27,7 +27,7 @@ public class ClipStorageImplTest {
 
         //new ClipStorageImpl().storeClipData(new ClipData());
                           //System.out.println(Configuration.getConfiguracion("Replicas"));
-       /* ClipStorageImpl bean = new ClipStorageImpl();
+        ClipStorageImpl bean = new ClipStorageImpl();
         bean.entityManager = Mockito.mock(EntityManager.class);
         loadTestStorageServers(bean.entityManager);
 

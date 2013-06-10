@@ -10,7 +10,6 @@ import edu.umflix.model.ClipData;
 import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 

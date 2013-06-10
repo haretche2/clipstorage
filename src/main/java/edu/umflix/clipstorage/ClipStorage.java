@@ -2,8 +2,6 @@ package edu.umflix.clipstorage;
 
 import edu.umflix.model.ClipData;
 
-import java.io.FileNotFoundException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Santago
