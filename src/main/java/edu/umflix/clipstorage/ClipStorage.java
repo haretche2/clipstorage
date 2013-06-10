@@ -1,5 +1,9 @@
 package edu.umflix.clipstorage;
 
+import edu.umflix.model.ClipData;
+
+import java.io.FileNotFoundException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Santago
@@ -7,10 +11,7 @@ package edu.umflix.clipstorage;
  * Time: 15:36
  * To change this template use File | Settings | File Templates.
  */
-import javax.ejb.Remote;
-
-@Remote
 public interface ClipStorage {
-    void storeClipData(int clipdata);
-    int getClipDataByClipId(long id);
+    void storeClipData(ClipData clipdata);
+    ClipData getClipDataByClipId(long id) throws FileNotFoundException;
 }
