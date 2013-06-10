@@ -66,7 +66,7 @@ public class ClipStorageImpl implements ClipStorage{
         }
         if(bytes==null){
             log.error("El archivo "+id+" no fue encontrado en el sistema");
-            throw new FileNotFoundException("El archivo "+id+" no fue encontrado en el sistema ");
+            throw new IllegalArgumentException("El id recibido no se encuentra en el sistema: "+id);
         }
             ClipData result= new ClipData();
         result.setBytes(bytes);
