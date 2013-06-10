@@ -13,5 +13,5 @@ import java.io.FileNotFoundException;
  */
 public interface ClipStorage {
     void storeClipData(ClipData clipdata);
-    ClipData getClipDataByClipId(long id) throws FileNotFoundException;
+    ClipData getClipDataByClipId(long id);
 }
