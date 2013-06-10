@@ -51,7 +51,7 @@ public class ClipStorageImpl implements ClipStorage{
     }
 
     @Override
-    public ClipData getClipDataByClipId(long id) throws FileNotFoundException {
+    public ClipData getClipDataByClipId(long id){
         List<StorageServer> clipDataLocations= Memory.getStorageServersForClipDataById(id);
         Byte[] bytes=null;
         while(clipDataLocations.size()>0 && bytes==null){
