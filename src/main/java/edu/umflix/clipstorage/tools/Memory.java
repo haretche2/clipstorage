@@ -28,8 +28,7 @@ public class Memory {
         for(StorageServer server : SERVERS){
             try{
                 log.debug("Iniciando primera conexion FTP con: "+server.getAddress());
-                FTPClient client = FtpTools.getClient(server);
-                FTPFile[] files=client.listFiles();
+                FTPFile[] files=FtpTools.listarArchivosEnServidor(server);
                 for(FTPFile file:files){
                     try{
                         ClipDataLocation newClipDataLocation=new ClipDataLocation();
@@ -77,6 +76,17 @@ public class Memory {
         }
         log.debug("Hay "+serversWithClipDatasWithThisId.size()+" servidores para Id="+id);
         return serversWithClipDatasWithThisId;
+    }
+
+    public static List<ClipDataLocation> getAndRemoveAllClipDataLocationOfServer(StorageServer storageServer){
+        List<ClipDataLocation> clipDataLocationsOfServer=new ArrayList<ClipDataLocation>();
+        for(ClipDataLocation clipDataLocation :CLIPDATAS){
+            if(clipDataLocation.getServidor()==storageServer){
+                clipDataLocationsOfServer.add(clipDataLocation);
+                CLIPDATAS.remove(clipDataLocation);
+            }
+        }
+        return clipDataLocationsOfServer;
     }
 
 }

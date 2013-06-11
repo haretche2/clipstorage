@@ -1,11 +1,10 @@
-Storages the ClipDatas on several servers with the following features:
- - Every ClipData can be saved on several redundant servers
- - Automatic - stand alone, storage server failure recovery (when several storage servers are configured)
- - writes and reads the ClipDatas through FTP
+Almacena ClipDatas en varios servidores con las siguientes caracteristicas:
+ - Cada ClipData se puede almacenar en varios servidores en forma redundante
+ - Recuperacion automatica de caida de servidor de almacenamiento (cuando varios servidores se encuentran configurados)
+ - Guarda y lee los datos por medio de FTP
 
 
-In order to setup a ClipData storage server, debe crearse un usuario telematica en ese servidor.
-Luego, the following commands has to be executed on that server:
+Para configurar un servidor de almacenamiento, debe ejecutar el siguiente comando:
 
 sudo apt-get install vsftpd
 

@@ -1,10 +1,15 @@
 package edu.umflix.clipstorage.tools;
 
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
+import edu.umflix.model.ClipData;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -17,7 +22,39 @@ import java.io.IOException;
 public class FtpTools {
     private static Logger log = Logger.getLogger(FtpTools.class);
 
-    public static FTPClient getClient(StorageServer storageServer) throws IOException {
+    public static FTPFile[] listarArchivosEnServidor(StorageServer server) throws IOException{
+        FTPClient client = getClient(server);
+        return(client.listFiles());
+    }
+
+    public static void guardar(StorageServer servidorEnQueAlmacenar, ClipData datos) throws IOException {
+        FTPClient clienteFtp = FtpTools.getClient(servidorEnQueAlmacenar);
+        byte[] bytes= new byte[datos.getBytes().length];
+        for(int i=0;i<bytes.length;i++){
+            bytes[i]=datos.getBytes()[i];
+        }
+        clienteFtp.storeFile((datos.getClip().getId()).toString(), new ByteArrayInputStream(bytes));
+        ClipDataLocation clipDataLocation=new ClipDataLocation();
+        clipDataLocation.setClipId(datos.getClip().getId());
+        clipDataLocation.setServidor(servidorEnQueAlmacenar);
+        Memory.addClipDataLocation(clipDataLocation);
+    }
+
+    public static Byte[] leer(StorageServer servidorDelQueLeer, long fileName) throws IOException {
+        log.debug("Iniciando lectura del archivo: "+Long.toString(fileName)+" del servidor: "+servidorDelQueLeer.getAddress());
+        FTPClient clienteFtp = FtpTools.getClient(servidorDelQueLeer);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        clienteFtp.retrieveFile(Long.toString(fileName), outputStream);
+
+        byte[] bytes=outputStream.toByteArray();
+        Byte[] convertedBytes= new Byte[bytes.length];
+        for(int i=0;i<bytes.length;i++){
+            convertedBytes[i]=bytes[i];
+        }
+        return convertedBytes;
+    }
+
+    private static FTPClient getClient(StorageServer storageServer) throws IOException {
         FTPClient client=new FTPClient();
         log.debug("creating client");
         String sFTP = storageServer.getAddress();

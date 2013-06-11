@@ -1,9 +1,12 @@
 package edu.umflix.clipstorage.impl;
 
+import edu.umflix.clipstorage.model.StorageServer;
+import edu.umflix.clipstorage.tools.FtpTools;
 import edu.umflix.model.ClipData;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class ClipStorageImplTest {
@@ -12,44 +15,48 @@ public class ClipStorageImplTest {
 
     @Test
     public void testTemp() {
-        return;
-       /*try {
-            ClipData c=new ClipStorageImpl().getClipDataByClipId(20);
-            System.out.print("'");
-            for (Byte b:c.getBytes()){
-                System.out.print((char)(byte)b);
-            }
-            System.out.print("'");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        return;
-
-        //new ClipStorageImpl().storeClipData(new ClipData());
-                          //System.out.println(Configuration.getConfiguracion("Replicas"));
-        ClipStorageImpl bean = new ClipStorageImpl();
-        bean.entityManager = Mockito.mock(EntityManager.class);
-        loadTestStorageServers(bean.entityManager);
-
         StorageServer s=new StorageServer();
-        s.setAddress("casa");
-        s.setAmountOfClipDataStored(2);
+        s.setAmountOfClipDataStored(3);
         s.setOnline(true);
-        bean.entityManager.persist(s);
-
-        s=new StorageServer();
-        s.setAddress("casa");
-        s.setAmountOfClipDataStored(2);
-        s.setOnline(true);
-
-        System.out.println(bean.entityManager.createQuery("from StorageServer"));
-
-        Mockito.verify(bean.entityManager).persist(s);
-
-         */
+        s.setAddress("192.168.1.104");
+        s.setPassword("telematica2013");
+        s.setUsername("telematica");
 
 
+        long tiempoInicio = System.currentTimeMillis();
 
+                       try{
+                           FtpTools.leer(s,(long)76);
+                        System.out.println(FtpTools.leer(s,(long)9).length);
+                       }catch (IOException e){
+                           System.out.println("Excepcion");
+                       }
+
+
+
+
+
+
+
+
+
+
+
+        long totalTiempo = System.currentTimeMillis() - tiempoInicio;
+        System.out.println("El tiempo de demora es :" + totalTiempo + " miliseg");
+
+
+
+
+        /*ClipData c=new ClipStorageImpl().getClipDataByClipId(20);
+        System.out.print("'");
+        for (Byte b:c.getBytes()){
+            System.out.print((char)(byte)b);
+        }
+        System.out.print("'");
+
+        return;
+          */
         //List<StorageServer> ss = bean.entityManager.createQuery("from StorageServer").getResultList();
 
         //for(StorageServer s :ss){
