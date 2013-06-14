@@ -1,6 +1,7 @@
 package edu.umflix.clipstorage.storage;
 
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.model.ClipData;
 import org.apache.commons.net.ftp.FTPFile;
@@ -21,7 +22,7 @@ public abstract class Storage {
 
     public static Storage getInstance(){
         if(instance==null){
-            if ("ftp".equals(Configuration.getConfiguracion("TipoDeAlmacenamientoDeClips"))){
+            if ("ftp".equals(Configuration.getConfiguracion(ConfigurationItemsEnum.TIPODEALMACENAMIENTODECLIPS))){
                 log.debug("Se utilizará almacenamiento de clips en servidores ftp");
                 instance=new FTPStorage();
             }else{

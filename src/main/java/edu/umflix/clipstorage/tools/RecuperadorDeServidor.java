@@ -1,6 +1,7 @@
 package edu.umflix.clipstorage.tools;
 
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.impl.ClipStorageImpl;
 import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
@@ -39,7 +40,7 @@ public class RecuperadorDeServidor{
         servidorCaido.setAmountOfClipDataStored(0);
         while(!servidorCaido.isOnline()){
             try {
-                Thread.sleep(Configuration.getIntConfiguration("TiempoEntreIntentosLevantarServidorCaido"));
+                Thread.sleep(Configuration.getIntConfiguration(ConfigurationItemsEnum.TIEMPOENTREINTENTOSLEVANTARSERVIDORCAIDO));
                 StorageServerTools.conectarServidor(servidorCaido);
             } catch (InterruptedException e) {
                 log.warn(e.getStackTrace());

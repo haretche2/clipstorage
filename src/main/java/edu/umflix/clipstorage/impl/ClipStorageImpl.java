@@ -3,6 +3,7 @@ package edu.umflix.clipstorage.impl;
 import edu.umflix.clipstorage.ClipStorage;
 import edu.umflix.clipstorage.Exceptions.NoServersOnlineException;
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.clipstorage.storage.FTPStorage;
 import edu.umflix.clipstorage.storage.Storage;
@@ -59,7 +60,7 @@ public class ClipStorageImpl implements ClipStorage{
             throw new IllegalArgumentException("Se recibio un clipdata con clip con id negativo");
         }
         List<StorageServer> disponibles= MemoryManager.getOnlineServers();
-        if(!StorageServerTools.guardarClipEnLosAlgunosDeLosServidores(disponibles, Configuration.getIntConfiguration("Replicas"),clipdata)){
+        if(!StorageServerTools.guardarClipEnLosAlgunosDeLosServidores(disponibles, Configuration.getIntConfiguration(ConfigurationItemsEnum.REPLICAS),clipdata)){
             throw new NoServersOnlineException();
         }
     }

@@ -1,6 +1,7 @@
 package edu.umflix.clipstorage.storage;
 
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.model.ClipData;
 import org.apache.commons.net.ftp.FTPClient;
@@ -68,7 +69,7 @@ public class FTPStorage extends Storage{
         try
         {
             log.debug("trying to connect to:" +storageServer.getAddress());
-            client.setConnectTimeout(Configuration.getIntConfiguration("TimeoutCrearClienteFTP"));
+            client.setConnectTimeout(Configuration.getIntConfiguration(ConfigurationItemsEnum.TIMEOUTCREARCLIENTEFTP));
             client.connect(sFTP);
             log.debug("trying to login to: "+storageServer.getAddress());
             boolean login = client.login(sUser, sPassword);

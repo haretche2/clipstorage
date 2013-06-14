@@ -1,6 +1,7 @@
 package edu.umflix.clipstorage.tools;
 
 import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.config.StorageServersXMLLoader;
 import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
@@ -27,7 +28,7 @@ public class MemoryManager {
     private static boolean ejecuteAtStartup=false;
 
     @PostConstruct
-    static void atStartup() {
+    void atStartup() {
         if(!ejecuteAtStartup){
             ejecuteAtStartup=true;
             log.debug("Iniciando carga de ubicaciones de ClipDatas en servidores");
@@ -42,7 +43,7 @@ public class MemoryManager {
         }
     }
     static {
-        atStartup();
+        new MemoryManager().atStartup();
     }
 
     public static List<StorageServer> getOnlineServers(){
@@ -70,7 +71,7 @@ public class MemoryManager {
     }
 
     public static boolean tengoLaCantidadDeReplicasNecesariasParaElClip(long clipId){
-        return (Configuration.getIntConfiguration("Replicas")<=getCantidadDeReplicasExistentesDeUnClip(clipId));
+        return (Configuration.getIntConfiguration(ConfigurationItemsEnum.REPLICAS)<=getCantidadDeReplicasExistentesDeUnClip(clipId));
     }
 
     public static List<StorageServer> getStorageServersConClipDataById(long id){
