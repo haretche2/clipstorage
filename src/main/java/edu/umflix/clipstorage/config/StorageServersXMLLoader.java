@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +25,16 @@ import java.util.List;
  * Time: 20:16
  * To change this template use File | Settings | File Templates.
  */
-public class StorageServersLoader {
+public class StorageServersXMLLoader {
 
-    private static final String UBICACION="C:\\Users\\Santago\\Documents\\GitHub\\clipstorage\\src\\main\\java\\edu\\umflix\\clipstorage\\config\\StorageServers.xml";
+    private static final String UBICACION="/config/StorageServers.xml";
 
-    private static Logger log= Logger.getLogger(StorageServersLoader.class);
+    private static Logger log= Logger.getLogger(StorageServersXMLLoader.class);
 
     public static List<StorageServer> loadXML(){
         try {
             List<StorageServer> result=new ArrayList<StorageServer>();
-            File fXmlFile = new File(UBICACION);
+            InputStream fXmlFile = StorageServersXMLLoader.class.getResourceAsStream(UBICACION);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
@@ -53,7 +54,7 @@ public class StorageServersLoader {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     StorageServer newElement=new StorageServer();
-                    newElement.setOnline(true);
+                    newElement.setOnline(false);
                     newElement.setAddress(eElement.getElementsByTagName("address").item(0).getTextContent());
                     log.debug("address : " + eElement.getElementsByTagName("address").item(0).getTextContent());
                     newElement.setUsername(eElement.getElementsByTagName("ftpusername").item(0).getTextContent());

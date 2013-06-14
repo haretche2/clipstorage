@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -15,12 +16,12 @@ import java.util.Properties;
  * To change this template use File | Settings | File Templates.
  */
 public class Configuration {
-    private static final String UBICACION="C:\\Users\\Santago\\Documents\\GitHub\\clipstorage\\src\\main\\java\\edu\\umflix\\clipstorage\\config\\config.properties";
+    private static final String UBICACION="/config/config.properties";
 
     public static String getConfiguracion(String key){
         Properties defaultProps = new Properties();
         try {
-            FileInputStream in = new FileInputStream(UBICACION);
+            InputStream in = Configuration.class.getResourceAsStream (UBICACION);
             defaultProps.load(in);
             in.close();
             return defaultProps.getProperty(key);

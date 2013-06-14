@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +23,7 @@ import java.io.IOException;
  */
 public class FtpTools {
     private static Logger log = Logger.getLogger(FtpTools.class);
+    private static Dictionary clientesCreados=new Hashtable();
 
     public static FTPFile[] listarArchivosEnServidor(StorageServer server) throws IOException{
         FTPClient client = getClient(server);
@@ -34,10 +37,6 @@ public class FtpTools {
             bytes[i]=datos.getBytes()[i];
         }
         clienteFtp.storeFile((datos.getClip().getId()).toString(), new ByteArrayInputStream(bytes));
-        ClipDataLocation clipDataLocation=new ClipDataLocation();
-        clipDataLocation.setClipId(datos.getClip().getId());
-        clipDataLocation.setServidor(servidorEnQueAlmacenar);
-        Memory.addClipDataLocation(clipDataLocation);
     }
 
     public static Byte[] leer(StorageServer servidorDelQueLeer, long fileName) throws IOException {
@@ -54,7 +53,17 @@ public class FtpTools {
         return convertedBytes;
     }
 
+    public static void borrar(StorageServer servidorEnQueBorrar,long fileName) throws IOException{
+        FTPClient clienteFtp = FtpTools.getClient(servidorEnQueBorrar);
+        clienteFtp.deleteFile(Long.toString(fileName));
+    }
+
+
+
     private static FTPClient getClient(StorageServer storageServer) throws IOException {
+        if(clientesCreados.get(storageServer.getAddress())!=null)
+            return (FTPClient)clientesCreados.get(storageServer.getAddress());
+
         FTPClient client=new FTPClient();
         log.debug("creating client");
         String sFTP = storageServer.getAddress();
@@ -62,10 +71,10 @@ public class FtpTools {
         String sPassword = storageServer.getPassword();
         try
         {
-            log.debug("trying to connect");
+            log.debug("trying to connect to:" +storageServer.getAddress());
             client.setConnectTimeout(Configuration.getIntConfiguration("TimeoutCrearClienteFTP"));
             client.connect(sFTP);
-            log.debug("trying to login");
+            log.debug("trying to login to: "+storageServer.getAddress());
             boolean login = client.login(sUser, sPassword);
             log.debug("ftp login result: "+login);
         }
@@ -73,6 +82,7 @@ public class FtpTools {
             log.error(ioe);
             throw ioe;
         }
+        clientesCreados.put(storageServer.getAddress(),client);
         return client;
     }
 }

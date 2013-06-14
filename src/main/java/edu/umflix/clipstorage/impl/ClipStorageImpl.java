@@ -1,10 +1,12 @@
 package edu.umflix.clipstorage.impl;
 
 import edu.umflix.clipstorage.ClipStorage;
+import edu.umflix.clipstorage.Exceptions.NoServersOnlineException;
 import edu.umflix.clipstorage.config.Configuration;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.clipstorage.tools.FtpTools;
-import edu.umflix.clipstorage.tools.Memory;
+import edu.umflix.clipstorage.tools.MemoryManager;
+import edu.umflix.clipstorage.tools.RecuperadorDeServidor;
 import edu.umflix.clipstorage.tools.StorageServerTools;
 import edu.umflix.model.Clip;
 import edu.umflix.model.ClipData;
@@ -13,9 +15,6 @@ import org.apache.log4j.Logger;
 import javax.ejb.Stateless;
 import java.io.IOException;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.jws.WebService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +27,12 @@ import javax.jws.WebService;
 public class ClipStorageImpl implements ClipStorage{
 
     private static Logger log= Logger.getLogger(ClipStorageImpl.class);
+
+    private static final ClipStorageImpl INSTANCIA=new ClipStorageImpl();
+
+    public static ClipStorageImpl getInstancia(){
+        return INSTANCIA;
+    }
 
     @Override
     public void storeClipData(ClipData clipdata) {
@@ -52,46 +57,35 @@ public class ClipStorageImpl implements ClipStorage{
             log.error("Se recibio un clipdata con clip con id negativo");
             throw new IllegalArgumentException("Se recibio un clipdata con clip con id negativo");
         }
-
-
-        List<StorageServer> disponibles= Memory.getOnlineServers();
-
-        for(int i=0;i< Configuration.getIntConfiguration("Replicas");i++){
-            if(disponibles.size()>0){
-                StorageServer siguiente=StorageServerTools.getSiguienteServidoresParaAlmacenarClip(disponibles);
-                disponibles.remove(siguiente);
-                try{
-                    FtpTools.guardar(siguiente, clipdata);
-                }catch (IOException e){
-                   i--;
-                    StorageServerTools.servidorCaido(siguiente);
-                }
-            }else {
-                log.warn("Insuficientes servidores de almacenamiento");
-            }
+        List<StorageServer> disponibles= MemoryManager.getOnlineServers();
+        if(!StorageServerTools.guardarClipEnLosAlgunosDeLosServidores(disponibles, Configuration.getIntConfiguration("Replicas"),clipdata)){
+            throw new NoServersOnlineException();
         }
     }
-
     @Override
     public ClipData getClipDataByClipId(long id){
-        List<StorageServer> clipDataLocations= Memory.getStorageServersForClipDataById(id);
+        List<StorageServer> servidoresConElClip= MemoryManager.getStorageServersConClipDataById(id);
         Byte[] bytes=null;
-        while(clipDataLocations.size()>0 && bytes==null){
-            StorageServer servidorAUsar=StorageServerTools.getRandomFromList(clipDataLocations);
+        while(servidoresConElClip.size()>0 && bytes==null){
+            StorageServer servidorAUsar=StorageServerTools.getRandomFromList(servidoresConElClip);
             try {
                 bytes=FtpTools.leer(servidorAUsar,id);
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                StorageServerTools.servidorCaido(servidorAUsar);
-                clipDataLocations.remove(servidorAUsar);
+                RecuperadorDeServidor.recuperar(servidorAUsar);
+                servidoresConElClip.remove(servidorAUsar);
             }
         }
         if(bytes==null){
             log.error("El archivo "+id+" no fue encontrado en el sistema");
             throw new IllegalArgumentException("El id recibido no se encuentra en el sistema: "+id);
         }
-            ClipData result= new ClipData();
+        Clip clipDeResult=new Clip();
+        clipDeResult.setId(id);
+        ClipData result= new ClipData();
         result.setBytes(bytes);
+        result.setId(id);
+        result.setClip(clipDeResult);
         return result;
     }
 }

@@ -1,20 +1,17 @@
 package edu.umflix.clipstorage.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
-
 /**
- * Created with IntelliJ IDEA.
- * User: Santago
- * Date: 3/06/13
- * Time: 14:45
- * To change this template use File | Settings | File Templates.
+ * Indica que un ClipData se encuentra en un determinado StorageSerever.
+ * Si un mismo ClipData se encuentra replicado en varios StorageServers, se dispondrá de varias instancias de esta clase con el mismo clipId.
  */
-public class ClipDataLocation implements Serializable{
+public class ClipDataLocation{
+    /**
+     * Servidor en que se encuentra el ClipData
+     */
     private StorageServer servidor;
+    /**
+     * clipId del ClipData.
+     */
     private long clipId;
 
     public long getClipId() {

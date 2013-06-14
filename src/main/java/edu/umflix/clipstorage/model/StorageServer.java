@@ -1,26 +1,29 @@
 package edu.umflix.clipstorage.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
-
 /**
- * Created with IntelliJ IDEA.
- * User: Santago
- * Date: 2/06/13
- * Time: 20:25
- * To change this template use File | Settings | File Templates.
+ * Esta clase representa un servidor de almacenamiento al que nos podemos conectar por FTP.
  */
-public class StorageServer implements Serializable {
+public class StorageServer{
+    /**
+     * Dirección ip del servidor para conectarse por FTP.
+     */
     private String address;
+    /**
+     * Usuario para conectarse al servidor FTP.
+     */
     private String username;
+    /**
+     * Clave para conectarse con el usuario especificado al servidor FTP.
+     */
     private String password;
+    /**
+     * Cantidad de clips almacenados en el servidor, no se considera la cantidad de bytes de cada clip.
+     */
     private long amountOfClipDataStored;
+    /**
+     * Indica que hasta el momento no han habido problemas para conectarse por FTP con el servidor
+     */
     private boolean isOnline;
-
-    public StorageServer(){
-    }
 
     public String getAddress() {
         return address;
@@ -29,7 +32,6 @@ public class StorageServer implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     public String getUsername() {
         return username;
@@ -62,5 +64,4 @@ public class StorageServer implements Serializable {
     public void setOnline(boolean online) {
         isOnline = online;
     }
-
 }

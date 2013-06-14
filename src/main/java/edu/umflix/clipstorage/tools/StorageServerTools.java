@@ -1,9 +1,13 @@
 package edu.umflix.clipstorage.tools;
 
 import edu.umflix.clipstorage.Exceptions.ClipStorageConfiguracionIncompletaException;
+import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
+import edu.umflix.model.ClipData;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -19,14 +23,6 @@ public class StorageServerTools {
     private static Logger log= Logger.getLogger(StorageServerTools.class);
     private static Random randomGenerator=new Random();
 
-    public static void servidorCaido(StorageServer servidorCaido){
-        servidorCaido.setOnline(false);
-
-
-        new ProcesoRecuperadorDeServidor(servidorCaido).start();
-    }
-
-
     public static StorageServer getSiguienteServidoresParaAlmacenarClip(List<StorageServer> disponibles){
         StorageServer elDeMenorEspacioOcupado=null;
         for(StorageServer actual:disponibles){
@@ -41,12 +37,58 @@ public class StorageServerTools {
         }
 
     }
-
-
+    public static boolean guardarClipEnLosAlgunosDeLosServidores(List<StorageServer> servidores, int replicas,ClipData clipdata){
+        boolean pudeGuardarAlMenosUnaCopia=false;
+        for(int i=0;i< replicas;i++){
+            if(servidores.size()>0){
+               StorageServer mejorServidorParaAlmacenarClip=StorageServerTools.getSiguienteServidoresParaAlmacenarClip(servidores);
+               servidores.remove(mejorServidorParaAlmacenarClip);
+                try{
+                    FtpTools.guardar(mejorServidorParaAlmacenarClip, clipdata);
+                    ClipDataLocation clipDataLocation=new ClipDataLocation();
+                    clipDataLocation.setClipId(clipdata.getClip().getId());
+                    clipDataLocation.setServidor(mejorServidorParaAlmacenarClip);
+                    MemoryManager.addClipDataLocation(clipDataLocation);
+                    pudeGuardarAlMenosUnaCopia=true;
+                }catch (IOException e){
+                    i--;
+                    RecuperadorDeServidor.recuperar(mejorServidorParaAlmacenarClip);
+                }
+            }else {
+                log.warn("guardarClipEnLosAlgunosDeLosServidores recibió una lista vacía de servidores");
+                break;
+            }
+        }
+        return pudeGuardarAlMenosUnaCopia;
+    }
 
     public static StorageServer getRandomFromList(List<StorageServer> list)    {
         int index = randomGenerator.nextInt(list.size());
         StorageServer item = list.get(index);
         return item;
     }
+
+    public static void conectarServidor(StorageServer server) throws IOException {
+        log.debug("Iniciando conexion con: "+server.getAddress());
+        FTPFile[] files=FtpTools.listarArchivosEnServidor(server);
+        for(FTPFile file:files){
+            try{
+                ClipDataLocation newClipDataLocation=new ClipDataLocation();
+                newClipDataLocation.setServidor(server);
+                newClipDataLocation.setClipId(Long.parseLong(file.getName()));
+                if(MemoryManager.tengoLaCantidadDeReplicasNecesariasParaElClip(newClipDataLocation.getClipId())){
+                    FtpTools.borrar(server,newClipDataLocation.getClipId());
+                }else{
+                    MemoryManager.addClipDataLocation(newClipDataLocation);
+                    log.debug("ClipData: Id="+newClipDataLocation.getClipId()+" Servidor="+newClipDataLocation.getServidor().getAddress());
+                }
+
+            }catch(NumberFormatException e){
+                log.warn("Hay un archivo con nombre corrupto: "+file.getName()+" en el servidor: "+server.getAddress());
+            }
+        }
+        server.setAmountOfClipDataStored(files.length);
+        server.setOnline(true);
+    }
+
 }
