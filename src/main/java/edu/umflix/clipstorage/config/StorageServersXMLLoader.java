@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import java.util.List;
  */
 public class StorageServersXMLLoader {
 
-    private static final String UBICACION="/config/StorageServers.xml";
+    private static final String UBICACION= "/StorageServers.xml";
 
     private static Logger log= Logger.getLogger(StorageServersXMLLoader.class);
 

@@ -1,9 +1,7 @@
 package edu.umflix.clipstorage.config;
 
 import edu.umflix.clipstorage.Exceptions.ClipStorageConfiguracionIncompletaException;
-import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -16,7 +14,7 @@ import java.util.Properties;
  * To change this template use File | Settings | File Templates.
  */
 public class Configuration {
-    private static final String UBICACION="/config/config.properties";
+    private static final String UBICACION= "/config.properties";
 
     public static String getConfiguracion(String key){
         Properties defaultProps = new Properties();
