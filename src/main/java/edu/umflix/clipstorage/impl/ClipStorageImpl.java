@@ -4,7 +4,8 @@ import edu.umflix.clipstorage.ClipStorage;
 import edu.umflix.clipstorage.Exceptions.NoServersOnlineException;
 import edu.umflix.clipstorage.config.Configuration;
 import edu.umflix.clipstorage.model.StorageServer;
-import edu.umflix.clipstorage.tools.FtpTools;
+import edu.umflix.clipstorage.storage.FTPStorage;
+import edu.umflix.clipstorage.storage.Storage;
 import edu.umflix.clipstorage.tools.MemoryManager;
 import edu.umflix.clipstorage.tools.RecuperadorDeServidor;
 import edu.umflix.clipstorage.tools.StorageServerTools;
@@ -69,7 +70,7 @@ public class ClipStorageImpl implements ClipStorage{
         while(servidoresConElClip.size()>0 && bytes==null){
             StorageServer servidorAUsar=StorageServerTools.getRandomFromList(servidoresConElClip);
             try {
-                bytes=FtpTools.leer(servidorAUsar,id);
+                bytes= Storage.getInstance().leer(servidorAUsar, id);
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 RecuperadorDeServidor.recuperar(servidorAUsar);

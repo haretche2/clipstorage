@@ -3,6 +3,8 @@ package edu.umflix.clipstorage.tools;
 import edu.umflix.clipstorage.Exceptions.ClipStorageConfiguracionIncompletaException;
 import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
+import edu.umflix.clipstorage.storage.FTPStorage;
+import edu.umflix.clipstorage.storage.Storage;
 import edu.umflix.model.ClipData;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
@@ -44,7 +46,7 @@ public class StorageServerTools {
                StorageServer mejorServidorParaAlmacenarClip=StorageServerTools.getSiguienteServidoresParaAlmacenarClip(servidores);
                servidores.remove(mejorServidorParaAlmacenarClip);
                 try{
-                    FtpTools.guardar(mejorServidorParaAlmacenarClip, clipdata);
+                    Storage.getInstance().guardar(mejorServidorParaAlmacenarClip, clipdata);
                     ClipDataLocation clipDataLocation=new ClipDataLocation();
                     clipDataLocation.setClipId(clipdata.getClip().getId());
                     clipDataLocation.setServidor(mejorServidorParaAlmacenarClip);
@@ -70,24 +72,24 @@ public class StorageServerTools {
 
     public static void conectarServidor(StorageServer server) throws IOException {
         log.debug("Iniciando conexion con: "+server.getAddress());
-        FTPFile[] files=FtpTools.listarArchivosEnServidor(server);
-        for(FTPFile file:files){
+        String[] fileNames= Storage.getInstance().listarArchivosEnServidor(server);
+        for(String unFileName:fileNames){
             try{
                 ClipDataLocation newClipDataLocation=new ClipDataLocation();
                 newClipDataLocation.setServidor(server);
-                newClipDataLocation.setClipId(Long.parseLong(file.getName()));
+                newClipDataLocation.setClipId(Long.parseLong(unFileName));
                 if(MemoryManager.tengoLaCantidadDeReplicasNecesariasParaElClip(newClipDataLocation.getClipId())){
-                    FtpTools.borrar(server,newClipDataLocation.getClipId());
+                    Storage.getInstance().borrar(server, newClipDataLocation.getClipId());
                 }else{
                     MemoryManager.addClipDataLocation(newClipDataLocation);
                     log.debug("ClipData: Id="+newClipDataLocation.getClipId()+" Servidor="+newClipDataLocation.getServidor().getAddress());
                 }
 
             }catch(NumberFormatException e){
-                log.warn("Hay un archivo con nombre corrupto: "+file.getName()+" en el servidor: "+server.getAddress());
+                log.warn("Hay un archivo con nombre corrupto: "+unFileName+" en el servidor: "+server.getAddress());
             }
         }
-        server.setAmountOfClipDataStored(files.length);
+        server.setAmountOfClipDataStored(fileNames.length);
         server.setOnline(true);
     }
 

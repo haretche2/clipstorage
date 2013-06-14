@@ -1,13 +1,9 @@
 package edu.umflix.clipstorage.impl;
 
-import edu.umflix.clipstorage.model.StorageServer;
-import edu.umflix.clipstorage.tools.FtpTools;
 import edu.umflix.model.Clip;
 import edu.umflix.model.ClipData;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Random;
 
 
@@ -36,15 +32,20 @@ public class ClipStorageImplTest {
     @Test
     public void testTemp() {
 
-        //ClipData clip1 = crearClipDataRandom();
-    //    ClipData c=ClipStorageImpl.getInstancia().getClipDataByClipId(878314);
-//         Byte[] b=c.getBytes();
+        ClipData clip1 = crearClipDataRandom();
+
+
+        ClipStorageImpl.getInstancia().storeClipData(clip1);
+
+        ClipData c=ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId());
+        System.out.println("Hola");
+
                    /*
         long tiempoInicio = System.currentTimeMillis();
 
                        try{
-                           FtpTools.leer(s,(long)76);
-                        System.out.println(FtpTools.leer(s,(long)9).length);
+                           FTPStorage.leer(s,(long)76);
+                        System.out.println(FTPStorage.leer(s,(long)9).length);
                        }catch (IOException e){
                            System.out.println("Excepcion");
                        }

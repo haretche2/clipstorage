@@ -1,7 +1,6 @@
-package edu.umflix.clipstorage.tools;
+package edu.umflix.clipstorage.storage;
 
 import edu.umflix.clipstorage.config.Configuration;
-import edu.umflix.clipstorage.model.ClipDataLocation;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.model.ClipData;
 import org.apache.commons.net.ftp.FTPClient;
@@ -11,8 +10,6 @@ import org.apache.log4j.Logger;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,17 +18,21 @@ import java.util.Hashtable;
  * Time: 15:57
  * To change this template use File | Settings | File Templates.
  */
-public class FtpTools {
-    private static Logger log = Logger.getLogger(FtpTools.class);
-    private static Dictionary clientesCreados=new Hashtable();
+public class FTPStorage extends Storage{
+    private Logger log = Logger.getLogger(FTPStorage.class);
 
-    public static FTPFile[] listarArchivosEnServidor(StorageServer server) throws IOException{
+    public String[] listarArchivosEnServidor(StorageServer server) throws IOException {
         FTPClient client = getClient(server);
-        return(client.listFiles());
+        FTPFile[] archivosComoFTPFileArray=client.listFiles();
+        String[] archivosComoStringArray= new String[archivosComoFTPFileArray.length];
+        for(int i=0;i<archivosComoFTPFileArray.length;i++){
+            archivosComoStringArray[i]=archivosComoFTPFileArray[i].getName();
+        }
+        return(archivosComoStringArray);
     }
 
-    public static void guardar(StorageServer servidorEnQueAlmacenar, ClipData datos) throws IOException {
-        FTPClient clienteFtp = FtpTools.getClient(servidorEnQueAlmacenar);
+    public void guardar(StorageServer servidorEnQueAlmacenar, ClipData datos) throws IOException {
+        FTPClient clienteFtp = getClient(servidorEnQueAlmacenar);
         byte[] bytes= new byte[datos.getBytes().length];
         for(int i=0;i<bytes.length;i++){
             bytes[i]=datos.getBytes()[i];
@@ -39,9 +40,9 @@ public class FtpTools {
         clienteFtp.storeFile((datos.getClip().getId()).toString(), new ByteArrayInputStream(bytes));
     }
 
-    public static Byte[] leer(StorageServer servidorDelQueLeer, long fileName) throws IOException {
+    public Byte[] leer(StorageServer servidorDelQueLeer, long fileName) throws IOException {
         log.debug("Iniciando lectura del archivo: "+Long.toString(fileName)+" del servidor: "+servidorDelQueLeer.getAddress());
-        FTPClient clienteFtp = FtpTools.getClient(servidorDelQueLeer);
+        FTPClient clienteFtp = getClient(servidorDelQueLeer);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         clienteFtp.retrieveFile(Long.toString(fileName), outputStream);
 
@@ -53,17 +54,12 @@ public class FtpTools {
         return convertedBytes;
     }
 
-    public static void borrar(StorageServer servidorEnQueBorrar,long fileName) throws IOException{
-        FTPClient clienteFtp = FtpTools.getClient(servidorEnQueBorrar);
+    public void borrar(StorageServer servidorEnQueBorrar,long fileName) throws IOException{
+        FTPClient clienteFtp = getClient(servidorEnQueBorrar);
         clienteFtp.deleteFile(Long.toString(fileName));
     }
 
-
-
-    private static FTPClient getClient(StorageServer storageServer) throws IOException {
-        if(clientesCreados.get(storageServer.getAddress())!=null)
-            return (FTPClient)clientesCreados.get(storageServer.getAddress());
-
+    private FTPClient getClient(StorageServer storageServer) throws IOException {
         FTPClient client=new FTPClient();
         log.debug("creating client");
         String sFTP = storageServer.getAddress();
@@ -82,7 +78,6 @@ public class FtpTools {
             log.error(ioe);
             throw ioe;
         }
-        clientesCreados.put(storageServer.getAddress(),client);
         return client;
     }
 }
