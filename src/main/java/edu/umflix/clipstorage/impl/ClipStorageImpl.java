@@ -25,7 +25,7 @@ import java.util.List;
  * Time: 20:54
  * To change this template use File | Settings | File Templates.
  */
-@Stateless
+@Stateless (name = "ClipStorage")
 public class ClipStorageImpl implements ClipStorage{
 
     private static Logger log= Logger.getLogger(ClipStorageImpl.class);

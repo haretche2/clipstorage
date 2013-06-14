@@ -139,3 +139,26 @@
 2013-06-14 17:37:06,188 DEBUG [main] tools.MemoryManager (MemoryManager.java:56)     - Hay 3 servidores online
 2013-06-14 17:37:06,189 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
 2013-06-14 17:37:06,190 DEBUG [main] tools.MemoryManager (MemoryManager.java:84)     - Hay 2 servidores para Id=327034
+2013-06-14 17:47:34,725 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:42)     - Root element :servers
+2013-06-14 17:47:34,732 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:46)     - ----------------------------
+2013-06-14 17:47:34,733 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:51)     - Current Element :server
+2013-06-14 17:47:34,735 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:58)     - address : 192.168.1.108
+2013-06-14 17:47:34,735 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:60)     - ftpusername : telematica
+2013-06-14 17:47:34,737 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:62)     - ftppassword : telematica2013
+2013-06-14 17:47:34,737 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:51)     - Current Element :server
+2013-06-14 17:47:34,738 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:58)     - address : 192.168.1.109
+2013-06-14 17:47:34,739 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:60)     - ftpusername : telematica
+2013-06-14 17:47:34,740 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:62)     - ftppassword : telematica2013
+2013-06-14 17:47:34,741 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:51)     - Current Element :server
+2013-06-14 17:47:34,742 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:58)     - address : 192.168.1.110
+2013-06-14 17:47:34,745 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:60)     - ftpusername : telematica
+2013-06-14 17:47:34,746 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:62)     - ftppassword : telematica2013
+2013-06-14 17:47:34,747 DEBUG [main] tools.MemoryManager (MemoryManager.java:34)     - Iniciando carga de ubicaciones de ClipDatas en servidores
+2013-06-14 17:47:34,748 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.108
+2013-06-14 17:47:34,756 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 17:47:34,759 INFO  [main] storage.Storage   ( Storage.java:29)     - Atención: Se utilizará almacenamiento de clips en memoria. Sólo debería ser utilizado por motivos de testing. Los clips se perderán al terminar la ejecución
+2013-06-14 17:47:34,760 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.109
+2013-06-14 17:47:34,761 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.110
+2013-06-14 17:47:34,763 DEBUG [main] tools.MemoryManager (MemoryManager.java:56)     - Hay 3 servidores online
+2013-06-14 17:47:34,764 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 17:47:34,765 DEBUG [main] tools.MemoryManager (MemoryManager.java:84)     - Hay 2 servidores para Id=234871
