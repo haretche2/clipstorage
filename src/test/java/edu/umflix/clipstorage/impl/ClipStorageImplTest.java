@@ -1,10 +1,19 @@
 package edu.umflix.clipstorage.impl;
 
+import edu.umflix.clipstorage.config.Configuration;
+import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
+import edu.umflix.clipstorage.model.StorageServer;
+import edu.umflix.clipstorage.storage.StorageMappingManager;
+import edu.umflix.clipstorage.tools.StorageServerCommunicationsHelper;
 import edu.umflix.model.Clip;
 import edu.umflix.model.ClipData;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static junit.framework.Assert.assertEquals;
 
 
 public class ClipStorageImplTest {
@@ -29,60 +38,60 @@ public class ClipStorageImplTest {
         return clipdata;
     }
 
+    /**
+     * Test basado en crear 3 clips aleatorios, guardar los 3 por separado y luego leerlos y verificar que lo que se lee se corresponde con lo previamente guardado.
+     */
     @Test
-    public void testTemp() {
-
+    public void testGuardarYLeerTresClipDatas() {
         ClipData clip1 = crearClipDataRandom();
-
+        ClipData clip2 = crearClipDataRandom();
+        ClipData clip3 = crearClipDataRandom();
 
         ClipStorageImpl.getInstancia().storeClipData(clip1);
+        ClipStorageImpl.getInstancia().storeClipData(clip2);
+        ClipStorageImpl.getInstancia().storeClipData(clip3);
 
-        ClipData c=ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId());
-        System.out.println("Hola");
-
-                   /*
-        long tiempoInicio = System.currentTimeMillis();
-
-                       try{
-                           FTPStorage.leer(s,(long)76);
-                        System.out.println(FTPStorage.leer(s,(long)9).length);
-                       }catch (IOException e){
-                           System.out.println("Excepcion");
-                       }
-
-
-
-
-
-
-
-
-
-
-
-        long totalTiempo = System.currentTimeMillis() - tiempoInicio;
-        System.out.println("El tiempo de demora es :" + totalTiempo + " miliseg");
-
-
-
-
-        ClipData c=new ClipStorageImpl().getClipDataByClipId(20);
-        System.out.print("'");
-        for (Byte b:c.getBytes()){
-            System.out.print((char)(byte)b);
-        }
-        System.out.print("'");
-
-        return;
-          */
-        //List<StorageServer> ss = bean.entityManager.createQuery("from StorageServer").getResultList();
-
-        //for(StorageServer s :ss){
-         //   System.out.println(s.getId());
-        //}
-
-
-
+        assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId()).getBytes(),clip1.getBytes());
+        assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip2.getClip().getId()).getBytes(),clip2.getBytes());
+        assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip3.getClip().getId()).getBytes(),clip3.getBytes());
     }
 
+    /**
+     * test basado en almacenar un clip en dos servidores, luego simular la caida de uno de ellos y verificar que se puede continuar leyendo el archivo.
+     */
+    @Test
+    public void testRecuperarServidor() {
+        ClipData clip1 = crearClipDataRandom();
+        List<StorageServer> servidoresDisponibles= StorageMappingManager.getOnlineServers();
+        List<StorageServer> servidores0y1=new ArrayList<StorageServer>();
+        servidores0y1.add(servidoresDisponibles.get(0));
+        servidores0y1.add(servidoresDisponibles.get(1));
+
+        StorageServerCommunicationsHelper.guardarClipEnLosAlgunosDeLosServidores(servidores0y1, 2, clip1);
+        StorageServerCommunicationsHelper.recuperar(servidoresDisponibles.get(0));
+
+        assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId()).getBytes(),clip1.getBytes());
+    }
+
+    /**
+     * test basado en almacenar un clip en dos servidores, luego simular la caida de uno de ellos, acceder varias veces al clip para asegurarnos de que el balanceador de carga detecte la caida, luego tirar el otro servidor y leer el dato.
+     * Si funciona Ok, significa que el recuperador de servidores caidos funcionó correctamente.
+     */
+    @Test
+    public void testRecuperarDosServidoresEnLosQueSeEncontrabaUnClip() {
+        ClipData clip1 = crearClipDataRandom();
+        List<StorageServer> servidoresDisponibles= StorageMappingManager.getOnlineServers();
+        List<StorageServer> servidores0y1=new ArrayList<StorageServer>();
+        servidores0y1.add(servidoresDisponibles.get(0));
+        servidores0y1.add(servidoresDisponibles.get(1));
+
+        StorageServerCommunicationsHelper.guardarClipEnLosAlgunosDeLosServidores(servidores0y1, 2, clip1);
+        StorageServerCommunicationsHelper.recuperar(servidoresDisponibles.get(0));
+
+        for(int i=0;i<1000;i++){
+            assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId()).getBytes(),clip1.getBytes());
+        }
+        StorageServerCommunicationsHelper.recuperar(servidoresDisponibles.get(1));
+        assertEquals(ClipStorageImpl.getInstancia().getClipDataByClipId(clip1.getClip().getId()).getBytes(),clip1.getBytes());
+    }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Esta clase permite realizar diversas acciones propias de las listas de StorageServer
  */
-public class StorageServerLists {
+public class StorageServerLists{
     private static Random randomGenerator=new Random();
 
     /**

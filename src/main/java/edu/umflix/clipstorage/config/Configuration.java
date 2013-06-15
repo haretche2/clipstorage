@@ -49,11 +49,11 @@ public class Configuration {
             log.warn("No se encontró el archivo de configuración, se utilizarán los valores por omisión.");
             switch (key){
                 case REPLICAS:
-                    return "2";
+                    return "3";
                 case TIMEOUTCREARCLIENTEFTP:
-                    return "10000";
+                    return "1000";
                 case TIEMPOENTREINTENTOSLEVANTARSERVIDORCAIDO:
-                    return "30000";
+                    return "3000";
                 case TIPODEALMACENAMIENTODECLIPS:
                     return "memoria";
                 default:
