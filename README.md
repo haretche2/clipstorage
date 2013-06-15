@@ -3,12 +3,13 @@ Almacena ClipDatas en varios servidores con las siguientes caracteristicas:
  - Recuperacion automatica de caida de servidor de almacenamiento (cuando varios servidores se encuentran configurados)
  - Guarda y lee los datos por medio de FTP
 
+Para habilitar el archivo de configuración config.properties o el de servidores StorageServers.xml, debe quitarse el "_template" de los ejemplos
 
-Para configurar un servidor de almacenamiento, debe ejecutar el siguiente comando:
+Para configurar un servidor de almacenamiento en Ubuntu, debe ejecutar el siguiente comando:
 
 sudo apt-get install vsftpd
 
-Reemplazar el archivo /etc/vsftpd.conf por lo siguiente:
+Luego reemplazar el archivo /etc/vsftpd.conf por lo siguiente:
 
  # Put in /etc/vsftpd.conf
  # Don't forget to change samurai into your local username

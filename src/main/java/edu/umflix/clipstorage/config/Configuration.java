@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 public class Configuration {
     private static Logger log= Logger.getLogger(StorageServersXMLLoader.class);
-    private static final String UBICACION= "/codnfig.properties";
+    private static final String UBICACION= "/config.properties";
 
     /**
      * Lee un item de configuración.

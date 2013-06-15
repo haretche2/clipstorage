@@ -13,11 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Santago
- * Date: 3/06/13
- * Time: 15:57
- * To change this template use File | Settings | File Templates.
+ * Esta clase permite almacenar los clips en servidores FTP, es la que se debería utilizar en producción.
  */
 public class FTPStorage extends Storage{
     private Logger log = Logger.getLogger(FTPStorage.class);
@@ -60,6 +56,12 @@ public class FTPStorage extends Storage{
         clienteFtp.deleteFile(Long.toString(fileName));
     }
 
+    /**
+     * Genera un cliente FTP para acceder al servidor
+     * @param storageServer Un StorageServer con los datos del servidor al que conectarse y crear el cliente
+     * @return Un cliente FTP para acceder al servidor indicado por storageServer
+     * @throws IOException En caso de que no se pueda conectar con el servidor
+     */
     private FTPClient getClient(StorageServer storageServer) throws IOException {
         FTPClient client=new FTPClient();
         log.debug("creating client");

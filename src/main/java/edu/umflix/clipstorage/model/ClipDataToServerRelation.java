@@ -4,7 +4,7 @@ package edu.umflix.clipstorage.model;
  * Indica que un ClipData se encuentra en un determinado StorageSerever.
  * Si un mismo ClipData se encuentra replicado en varios StorageServers, se dispondrá de varias instancias de esta clase con el mismo clipId.
  */
-public class ClipDataLocation{
+public class ClipDataToServerRelation {
     /**
      * Servidor en que se encuentra el ClipData
      */

@@ -4,17 +4,13 @@ import edu.umflix.clipstorage.config.Configuration;
 import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.model.ClipData;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Santago
- * Date: 14/06/13
- * Time: 14:35
- * To change this template use File | Settings | File Templates.
+ *  Esta clase abstracta define las reglas que debe cumplir una tecnología de almacenamiento de clips y define cual utilizar dependiendo de la configuración definida en config.properties.
+ *  La implementación de las funciones de acceso y escritura se encuentran abiertas a su implementación por cada una de esas tecnologías.
  */
 public abstract class Storage {
     private static Logger log = Logger.getLogger(Storage.class);

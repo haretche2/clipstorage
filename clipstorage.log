@@ -162,3 +162,77 @@
 2013-06-14 17:47:34,763 DEBUG [main] tools.MemoryManager (MemoryManager.java:56)     - Hay 3 servidores online
 2013-06-14 17:47:34,764 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
 2013-06-14 17:47:34,765 DEBUG [main] tools.MemoryManager (MemoryManager.java:84)     - Hay 2 servidores para Id=234871
+2013-06-14 18:20:14,014 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:39)     - Root element :servers
+2013-06-14 18:20:14,033 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:43)     - ----------------------------
+2013-06-14 18:20:14,034 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:48)     - Current Element :server
+2013-06-14 18:20:14,038 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:55)     - address : 192.168.1.108
+2013-06-14 18:20:14,042 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:57)     - ftpusername : telematica
+2013-06-14 18:20:14,043 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:59)     - ftppassword : telematica2013
+2013-06-14 18:20:14,045 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:48)     - Current Element :server
+2013-06-14 18:20:14,046 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:55)     - address : 192.168.1.109
+2013-06-14 18:20:14,047 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:57)     - ftpusername : telematica
+2013-06-14 18:20:14,048 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:59)     - ftppassword : telematica2013
+2013-06-14 18:20:14,065 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:48)     - Current Element :server
+2013-06-14 18:20:14,066 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:55)     - address : 192.168.1.110
+2013-06-14 18:20:14,068 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:57)     - ftpusername : telematica
+2013-06-14 18:20:14,070 DEBUG [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:59)     - ftppassword : telematica2013
+2013-06-14 18:20:14,071 DEBUG [main] tools.MemoryManager (MemoryManager.java:34)     - Iniciando carga de ubicaciones de ClipDatas en servidores
+2013-06-14 18:20:14,072 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.108
+2013-06-14 18:20:14,080 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 18:20:14,083 INFO  [main] storage.Storage   ( Storage.java:29)     - Atención: Se utilizará almacenamiento de clips en memoria. Sólo debería ser utilizado por motivos de testing. Los clips se perderán al terminar la ejecución
+2013-06-14 18:20:14,085 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.109
+2013-06-14 18:20:14,086 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.110
+2013-06-14 18:20:14,086 DEBUG [main] tools.MemoryManager (MemoryManager.java:56)     - Hay 3 servidores online
+2013-06-14 18:20:14,087 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 18:20:14,089 DEBUG [main] tools.MemoryManager (MemoryManager.java:84)     - Hay 2 servidores para Id=138111
+2013-06-14 18:28:19,533 WARN  [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:78)     - No se encontró el archivo de definición de servidores, se utilizarán valores predefinidos
+2013-06-14 18:28:19,542 DEBUG [main] tools.MemoryManager (MemoryManager.java:34)     - Iniciando carga de ubicaciones de ClipDatas en servidores
+2013-06-14 18:28:19,544 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.100
+2013-06-14 18:28:19,549 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 18:28:19,551 INFO  [main] storage.Storage   ( Storage.java:29)     - Atención: Se utilizará almacenamiento de clips en memoria. Sólo debería ser utilizado por motivos de testing. Los clips se perderán al terminar la ejecución
+2013-06-14 18:28:19,553 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.101
+2013-06-14 18:28:19,554 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.102
+2013-06-14 18:28:19,554 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.103
+2013-06-14 18:28:19,556 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.104
+2013-06-14 18:28:19,557 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.105
+2013-06-14 18:28:19,558 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.106
+2013-06-14 18:28:19,558 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.107
+2013-06-14 18:28:19,559 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.108
+2013-06-14 18:28:19,560 DEBUG [main] tools.StorageServerTools (StorageServerTools.java:74)     - Iniciando conexion con: 192.168.1.109
+2013-06-14 18:28:19,561 DEBUG [main] tools.MemoryManager (MemoryManager.java:56)     - Hay 10 servidores online
+2013-06-14 18:28:19,561 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 18:28:19,566 DEBUG [main] tools.MemoryManager (MemoryManager.java:84)     - Hay 2 servidores para Id=90566
+2013-06-14 22:28:08,289 WARN  [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:79)     - No se encontró el archivo de definición de servidores, se utilizarán valores predefinidos
+2013-06-14 22:28:08,296 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:45)     - Iniciando carga de ubicaciones de ClipDatas en servidores
+2013-06-14 22:28:08,300 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.100
+2013-06-14 22:28:08,304 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 22:28:08,305 INFO  [main] storage.Storage   ( Storage.java:25)     - Atención: Se utilizará almacenamiento de clips en memoria. Sólo debería ser utilizado por motivos de testing. Los clips se perderán al terminar la ejecución
+2013-06-14 22:28:08,306 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.101
+2013-06-14 22:28:08,306 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.102
+2013-06-14 22:28:08,307 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.103
+2013-06-14 22:28:08,307 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.104
+2013-06-14 22:28:08,307 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.105
+2013-06-14 22:28:08,311 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.106
+2013-06-14 22:28:08,313 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.107
+2013-06-14 22:28:08,315 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.108
+2013-06-14 22:28:08,315 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.109
+2013-06-14 22:28:08,315 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:75)     - Hay 10 servidores online
+2013-06-14 22:28:08,316 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 22:28:08,323 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:139)     - Hay 2 servidores para el clip con id: 933931
+2013-06-14 22:28:36,419 WARN  [main] config.StorageServersXMLLoader (StorageServersXMLLoader.java:79)     - No se encontró el archivo de definición de servidores, se utilizarán valores predefinidos
+2013-06-14 22:28:36,425 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:45)     - Iniciando carga de ubicaciones de ClipDatas en servidores
+2013-06-14 22:28:36,428 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.100
+2013-06-14 22:28:36,433 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 22:28:36,435 INFO  [main] storage.Storage   ( Storage.java:25)     - Atención: Se utilizará almacenamiento de clips en memoria. Sólo debería ser utilizado por motivos de testing. Los clips se perderán al terminar la ejecución
+2013-06-14 22:28:36,436 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.101
+2013-06-14 22:28:36,437 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.102
+2013-06-14 22:28:36,437 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.103
+2013-06-14 22:28:36,438 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.104
+2013-06-14 22:28:36,439 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.105
+2013-06-14 22:28:36,439 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.106
+2013-06-14 22:28:36,439 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.107
+2013-06-14 22:28:36,439 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.108
+2013-06-14 22:28:36,440 DEBUG [main] tools.StorageServerCommunicationsHelper (StorageServerCommunicationsHelper.java:60)     - Iniciando conexion con: 192.168.1.109
+2013-06-14 22:28:36,440 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:75)     - Hay 10 servidores online
+2013-06-14 22:28:36,441 WARN  [main] config.StorageServersXMLLoader (Configuration.java:49)     - No se encontró el archivo de configuración, se utilizarán los valores por omisión.
+2013-06-14 22:28:36,444 DEBUG [main] storage.StorageMappingManager (StorageMappingManager.java:139)     - Hay 2 servidores para el clip con id: 233099

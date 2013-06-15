@@ -1,11 +1,7 @@
 package edu.umflix.clipstorage.Exceptions;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Santago
- * Date: 3/06/13
- * Time: 16:54
- * To change this template use File | Settings | File Templates.
+ * Esta excepción se lanza cuando no hay servidores online, en general todos los definidos deben encontrarse caidos para que sea lanzada.
  */
 public class NoServersOnlineException extends RuntimeException {
 
