@@ -1,7 +1,5 @@
 package edu.umflix.clipstorage.impl;
 
-import edu.umflix.clipstorage.config.Configuration;
-import edu.umflix.clipstorage.config.ConfigurationItemsEnum;
 import edu.umflix.clipstorage.model.StorageServer;
 import edu.umflix.clipstorage.storage.StorageMappingManager;
 import edu.umflix.clipstorage.tools.StorageServerCommunicationsHelper;
